@@ -20,3 +20,18 @@ void addnode() {
     cin >> newNode->name;       //Assign value to the data field ot the new node
 }
 
+//Insert new node in the list
+if (START == NULL || newNode->noMhs <= START->noMhs) {
+
+    if (START != NULL && newNode->noMhs == START->noMhs) {
+        cout << "\033[31Dumplicate roll numbers not allowed\033[Om" << endl;
+        return;
+    }
+    // if the list is empty,make the new node the START
+    newNode->next = START;  //step 3: make the new node point to the first node
+    if (START != NULL) {
+        START->prev = newNode;  //step 4: make the first node point to the new node
+    }
+    newNode->prev = NULL;       //step 5: make the new node point to NULL
+    START = newNode;            //step 6: make the new node the first node
+}
