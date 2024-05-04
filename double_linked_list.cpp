@@ -12,26 +12,59 @@ struct Node
 
 Node* START = NULL;
 
-void addnode() {
+void addnode() 
+{
     Node* newNode = new Node(); //step 1;create a new node
     cout << "\nEnter the roll number of student: ";
     cin >> newNode->noMhs;      // Assign value to the data field of the new node
     cout << "\nEnter the name of the student: ";
     cin >> newNode->name;       //Assign value to the data field ot the new node
-}
 
-//Insert new node in the list
-if (START == NULL || newNode->noMhs <= START->noMhs) {
+    //Insert new node in the list
+    if (START == NULL || newNode->noMhs <= START->noMhs) 
+    {
+        if (START != NULL && newNode->noMhs == START->noMhs) 
+        {
+            cout << "\033[31Dumplicate roll numbers not allowed\033[Om" << endl;
+            return;
+        }
+        // if the list is empty,make the new node the START
+        newNode->next = START;  //step 3: make the new node point to the first node
+        if (START != NULL) 
+        {
+            START->prev = newNode;  //step 4: make the first node point to the new node
+        }
+        newNode->prev = NULL;       //step 5: make the new node point to NULL
+        START = newNode;            //step 6: make the new node the first node
+    }
+    else
+    {
+        //insert the new node in the middle or at the end
+        Node* current = START;      //step 1.a: start form the first node
+        Node* previous = NULL;      //step 1.b: previous node is NULL initially
 
-    if (START != NULL && newNode->noMhs == START->noMhs) {
-        cout << "\033[31Dumplicate roll numbers not allowed\033[Om" << endl;
-        return;
+        while (current !=NULL && current->noMhs < newNode->noMhs)
+        {                           //step 1.c: traverse the list to find the correct position
+            previous = current;     //step 1.d: move the previous to the currned node
+            current = current->next;//step 1.e: move the current to the next node
+        }
+
+        newNode->next = current;    //step 4: make the next field of the new node point to current
+        newNode->prev = previous;   //step 5: make the previous field of the new node point to previous
+
+        if (current != NULL)
+        {
+            current->prev = newNode; //step 6: make the previous field of the current node point to the new node
+        }
+
+        if (previous != NULL)
+        {
+            previous->next = newNode; //step 7: make the next field of the previous node point to the new node 
+        }
+        else
+        {
+            //if  previous is still NULL, it means newNode is now the first node
+            START = newNode;
+        }
     }
-    // if the list is empty,make the new node the START
-    newNode->next = START;  //step 3: make the new node point to the first node
-    if (START != NULL) {
-        START->prev = newNode;  //step 4: make the first node point to the new node
-    }
-    newNode->prev = NULL;       //step 5: make the new node point to NULL
-    START = newNode;            //step 6: make the new node the first node
 }
