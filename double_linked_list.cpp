@@ -193,5 +193,12 @@ void searchData()
         cout << "\nRoll number" << curr->noMhs << endl;
         cout << "\nName: " << curr->name << endl;
     }
+}
 
+int main()
+{
+    while (true)
+    {
+       
+    }
 }
