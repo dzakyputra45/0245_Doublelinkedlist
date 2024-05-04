@@ -231,7 +231,14 @@ int main()
             case '6':
                 return 0;
                 break;
+            default:
+                cout << "\nInvalid option" << endl;
+                break;
             }
+       }
+        catch (exception& e)
+        {
+            cout << "Check for the values enterted." << endl;
         }
     }
 }
